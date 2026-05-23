@@ -21,6 +21,7 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+.conda/
 
 # Local editor noise
 .DS_Store
