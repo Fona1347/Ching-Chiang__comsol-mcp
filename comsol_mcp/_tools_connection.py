@@ -199,6 +199,37 @@ def server_connect(host: str = _srv.DEFAULT_HOST, port: int = _srv.DEFAULT_PORT,
             and getattr(_srv._server, "port", None) == requested_port
             and requested_host == _srv.DEFAULT_HOST
         )
+        already_connected = bool(
+            _srv._client is not None
+            and _srv._client_connected
+            and _srv._connected_host == requested_host
+            and _srv._connected_port == requested_port
+        )
+        if already_connected:
+            adopted = _adopt_model_by_name(model_name.strip())
+            if adopted is not None:
+                _set_current_model(adopted, origin="connected")
+            workflow = _read_workflow_state()
+            if not bool(workflow.get("visible_main_locked")):
+                _write_workflow_state({"workflow_stage": "mcp_connected"})
+            _write_status()
+            current_label = _safe_model_label(_srv._current_model)
+            return {
+                "connected": True,
+                "attached_to_existing_server": True,
+                "host": requested_host,
+                "port": requested_port,
+                "endpoint": f"{requested_host}:{requested_port}",
+                "current_model_label": current_label,
+                "has_current_model": bool(current_label),
+                "next_step": (
+                    'Use model_create() or model_load() to select a working model.'
+                    if not current_label
+                    else ""
+                ),
+                "preserved_local_server": preserve_local_server,
+                "reused_existing_client": True,
+            }
         if _srv._client is not None:
             _disconnect_locked(shutdown_server=False)
         if _srv._server is not None and _srv._server_started_by_mcp and not preserve_local_server:

@@ -202,3 +202,37 @@ class TestWorkflowStateIO:
 
         state = _read_workflow_state()
         assert state["mode"] == "manual"  # falls back to default
+
+
+class TestServerConnectReuse:
+    def test_reuses_existing_client_for_same_endpoint(self, monkeypatch):
+        import comsol_mcp._server as srv
+        import comsol_mcp._tools_connection as connection_tools
+
+        client = object()
+        monkeypatch.setattr(srv, "_client", client)
+        monkeypatch.setattr(srv, "_client_connected", True)
+        monkeypatch.setattr(srv, "_connected_host", "127.0.0.1")
+        monkeypatch.setattr(srv, "_connected_port", 2036)
+        monkeypatch.setattr(srv, "_server", None)
+        monkeypatch.setattr(srv, "_server_started_by_mcp", False)
+        monkeypatch.setattr(srv, "_current_model", None)
+
+        monkeypatch.setattr(connection_tools, "_require_mph", lambda: None)
+        monkeypatch.setattr(connection_tools, "_port_is_open", lambda *args, **kwargs: True)
+        monkeypatch.setattr(connection_tools, "_adopt_model_by_name", lambda name: None)
+
+        def fail_disconnect(*args, **kwargs):
+            raise AssertionError("existing connected client should not be disconnected")
+
+        def fail_new_client(*args, **kwargs):
+            raise AssertionError("existing connected client should be reused")
+
+        monkeypatch.setattr(connection_tools, "_disconnect_locked", fail_disconnect)
+        monkeypatch.setattr(connection_tools, "_ensure_client_shell", fail_new_client)
+
+        result = json.loads(connection_tools.server_connect("127.0.0.1", 2036))
+
+        assert result["success"] is True
+        assert result["data"]["connected"] is True
+        assert result["data"]["reused_existing_client"] is True
