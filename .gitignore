@@ -22,6 +22,7 @@ __pycache__/
 .venv/
 venv/
 .conda/
+.pytest_cache/
 
 # Local editor noise
 .DS_Store
