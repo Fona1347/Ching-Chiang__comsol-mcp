@@ -19,14 +19,14 @@
 默认路径如下：
 
 ```powershell
-$Repo = "E:\hycodespace\Clone\chiangching_tsinghua\comsol-mcp"
+$Repo = "E:\hycodespace\Forks\Ching-Chiang__comsol-mcp"
 $ComsolRoot = "D:\Softwares_02\COMSOL64\Multiphysics"
 ```
 
 进入仓库：
 
 ```powershell
-cd E:\hycodespace\Clone\chiangching_tsinghua\comsol-mcp
+cd E:\hycodespace\Forks\Ching-Chiang__comsol-mcp
 ```
 
 推荐使用仓库内的 Conda Python：
@@ -67,7 +67,7 @@ comsol-server-home/
 推荐使用 console script 启动：
 
 ```powershell
-cd E:\hycodespace\Clone\chiangching_tsinghua\comsol-mcp
+cd E:\hycodespace\Forks\Ching-Chiang__comsol-mcp
 $env:COMSOL_ROOT = "D:\Softwares_02\COMSOL64\Multiphysics"
 $env:COMSOL_SERVER_MCP_HOME = "$PWD\comsol-server-home"
 .\.conda\Scripts\comsol-mcp.exe
@@ -76,7 +76,7 @@ $env:COMSOL_SERVER_MCP_HOME = "$PWD\comsol-server-home"
 如果该入口不可用，可以用仓库根目录下的薄入口文件：
 
 ```powershell
-cd E:\hycodespace\Clone\chiangching_tsinghua\comsol-mcp
+cd E:\hycodespace\Forks\Ching-Chiang__comsol-mcp
 $env:COMSOL_ROOT = "D:\Softwares_02\COMSOL64\Multiphysics"
 $env:COMSOL_SERVER_MCP_HOME = "$PWD\comsol-server-home"
 .\.conda\python.exe mcp_server.py
@@ -109,11 +109,11 @@ Tool already exists: server_info
 {
   "mcpServers": {
     "comsol-mcp-server": {
-      "command": "E:/hycodespace/Clone/chiangching_tsinghua/comsol-mcp/.conda/Scripts/comsol-mcp.exe",
+      "command": "E:/hycodespace/Forks/Ching-Chiang__comsol-mcp/.conda/Scripts/comsol-mcp.exe",
       "args": [],
       "env": {
         "COMSOL_ROOT": "D:/Softwares_02/COMSOL64/Multiphysics",
-        "COMSOL_SERVER_MCP_HOME": "E:/hycodespace/Clone/chiangching_tsinghua/comsol-mcp/comsol-server-home"
+        "COMSOL_SERVER_MCP_HOME": "E:/hycodespace/Forks/Ching-Chiang__comsol-mcp/comsol-server-home"
       }
     }
   }
@@ -126,11 +126,11 @@ Tool already exists: server_info
 {
   "mcpServers": {
     "comsol-mcp-server": {
-      "command": "E:/hycodespace/Clone/chiangching_tsinghua/comsol-mcp/.conda/python.exe",
+      "command": "E:/hycodespace/Forks/Ching-Chiang__comsol-mcp/.conda/python.exe",
       "args": ["mcp_server.py"],
       "env": {
         "COMSOL_ROOT": "D:/Softwares_02/COMSOL64/Multiphysics",
-        "COMSOL_SERVER_MCP_HOME": "E:/hycodespace/Clone/chiangching_tsinghua/comsol-mcp/comsol-server-home"
+        "COMSOL_SERVER_MCP_HOME": "E:/hycodespace/Forks/Ching-Chiang__comsol-mcp/comsol-server-home"
       }
     }
   }
@@ -153,7 +153,7 @@ check_server_port("127.0.0.1", 2036)
 start_visible_main_workflow(
   "127.0.0.1",
   2036,
-  "E:/hycodespace/Clone/chiangching_tsinghua/comsol-mcp/comsol-server-home/test-models/first_use_visible_main.mph"
+  "E:/hycodespace/Forks/Ching-Chiang__comsol-mcp/comsol-server-home/test-models/first_use_visible_main.mph"
 )
 ```
 
@@ -312,7 +312,7 @@ Ctrl+C
 看到 PowerShell prompt 返回即可：
 
 ```powershell
-PS E:\hycodespace\Clone\chiangching_tsinghua\comsol-mcp>
+PS E:\hycodespace\Forks\Ching-Chiang__comsol-mcp>
 ```
 
 如果退出时看到：
@@ -392,7 +392,7 @@ run_visible_main_iteration("label", "[]", "")
 ## 13. 最小推荐流程
 
 ```powershell
-cd E:\hycodespace\Clone\chiangching_tsinghua\comsol-mcp
+cd E:\hycodespace\Forks\Ching-Chiang__comsol-mcp
 $env:COMSOL_ROOT = "D:\Softwares_02\COMSOL64\Multiphysics"
 $env:COMSOL_SERVER_MCP_HOME = "$PWD\comsol-server-home"
 .\.conda\Scripts\comsol-mcp.exe
